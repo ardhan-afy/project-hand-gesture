@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Puzzle Cam — Hand Frame Capture</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="lift" color-interpolation-filters="sRGB">
+    <feComponentTransfer>
+      <feFuncR id="gR" type="gamma" amplitude="1" exponent="0.7" offset="0"/>
+      <feFuncG id="gG" type="gamma" amplitude="1" exponent="0.7" offset="0"/>
+      <feFuncB id="gB" type="gamma" amplitude="1" exponent="0.7" offset="0"/>
+    </feComponentTransfer>
+  </filter>
+</svg>
+<header>
+  <h1>PUZZLE-CAM · HAND-FRAME CAPTURE</h1>
+  <span>MediaPipe Hand Landmarker</span>
+</header>
+
+<main>
+  <section class="stage">
+    <video id="webcam" autoplay playsinline muted></video>
+    <canvas id="scene"></canvas>
+    <div class="chip" id="status">● MENYIAPKAN KAMERA</div>
+    <div class="loader" id="loader" hidden></div>
+    <div class="hint"><span id="hint">…</span></div>
+  </section>
+
+  <aside>
+    <div class="card">
+      <h2>PERMAINAN</h2>
+      <div class="row"><span>Waktu</span><b id="time">0.0s</b></div>
+      <div class="row"><span>Gerakan</span><b id="moves">0</b></div>
+      <div class="row"><span>Rekor <span id="bestLbl" style="color:var(--mute)"></span></span><b id="best">–</b></div>
+      <div class="btns" style="margin-top:10px">
+        <button id="btnShot">Ambil foto <kbd>Space</kbd></button>
+        <button id="btnReset">Ulang <kbd>R</kbd></button>
+      </div>
+      <div class="btns" style="margin-top:8px">
+        <button id="btnShuffle">Acak ulang <kbd>A</kbd></button>
+        <button id="btnFull">Layar penuh <kbd>F</kbd></button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>PENGATURAN</h2>
+      <div class="row"><span>Kamera</span><b id="camInfo" style="color:var(--accent)">–</b></div>
+      <div class="row"><label for="grid">Ukuran puzzle</label>
+        <select id="grid"><option>2</option><option selected>3</option><option>4</option><option>5</option></select></div>
+      <div class="row"><label for="bright">Kecerahan</label>
+        <input id="bright" type="range" min="0.8" max="2.5" step="0.05" value="1.15"></div>
+      <div class="row"><label for="shadow">Angkat bayangan</label>
+        <input id="shadow" type="range" min="0.35" max="1" step="0.05" value="0.65"></div>
+      <div class="row"><label for="denoise">Haluskan noise</label>
+        <input id="denoise" type="range" min="0" max="0.7" step="0.05" value="0.35"></div>
+      <div class="row"><label for="auto">Foto otomatis</label>
+        <input id="auto" type="checkbox" checked></div>
+      <div class="row"><label for="sound">Suara</label>
+        <input id="sound" type="checkbox" checked></div>
+      <div class="row"><label for="mono">Foto hitam-putih</label>
+        <input id="mono" type="checkbox" checked></div>
+    </div>
+
+    <div class="card">
+      <h2>GALERI <span style="font-weight:400">(klik untuk unduh)</span></h2>
+      <div class="empty" id="empty">Belum ada foto.</div>
+      <div class="gallery" id="gallery"></div>
+    </div>
+  </aside>
+</main>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
